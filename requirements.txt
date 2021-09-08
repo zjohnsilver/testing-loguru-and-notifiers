@@ -1,0 +1,4 @@
+loguru==0.5.3
+notifiers==1.2.1
+black==21.8b0
+flake8==3.9.2

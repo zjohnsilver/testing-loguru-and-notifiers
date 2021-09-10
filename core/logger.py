@@ -1,6 +1,6 @@
 import sys
 from loguru import logger
-from .notify import telegram_handler, gmail_handler
+from .notify import telegram_handler
 
 logger.remove()
 
@@ -15,12 +15,6 @@ logger.add(
 
 logger.add(
     telegram_handler,
-    format=("{message}"),
-    level="ERROR",
-)
-
-logger.add(
-    gmail_handler,
     format=("{message}"),
     level="ERROR",
 )

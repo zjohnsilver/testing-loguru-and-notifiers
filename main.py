@@ -2,16 +2,16 @@ import os
 import argparse
 import importlib
 from pathlib import Path
-from libs.path import get_folders_names_from_path
+from libs.path import get_folders_names_from_path, create_folders_if_not_exists
 from core.logger import logger
 
-BASE_DIR = Path(__file__).resolve().parent
-
+BASE_DIR = Path(__file__).resolve().parent  
 
 if __name__ == "__main__":
     folder_path = os.path.join(BASE_DIR, "logs")
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
+
 
     root_folders_names = get_folders_names_from_path(".")
 
@@ -19,12 +19,8 @@ if __name__ == "__main__":
         folder_name for folder_name in root_folders_names if "P" in folder_name
     ]
 
-    for process_folder_name in process_folders_names:
-        process_folder_name = process_folder_name.split("/")[1]
-        folder_path = os.path.join(BASE_DIR, "logs", process_folder_name)
-
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
+    folder_path = os.path.join(BASE_DIR, "logs")
+    create_folders_if_not_exists(process_folders_names, folder_path)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
